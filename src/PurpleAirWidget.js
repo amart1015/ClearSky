@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 const PurpleAirWidget = () => {
     useEffect(() => {
         const script = document.createElement('script');
-        script.src = 'https://www.purpleair.com/pa.widget.js?key=8CUTD2YBFY5LBJGE&module=AQI&conversion=C0&average=10&layer=standard&container=PurpleAirWidget_186707_module_AQI_conversion_C0_average_10_layer_standard';
+        script.src = 'https://www.purpleair.com/pa.widget.js?key=IOJ5DCB5BQRHIXCP&module=AQI&conversion=C0&average=10&layer=standard&container=PurpleAirWidget_18499_module_AQI_conversion_C0_average_10_layer_standard';
         document.body.appendChild(script);
 
         return () => {
@@ -15,7 +15,7 @@ const PurpleAirWidget = () => {
     
 
   return (
-    <div id='PurpleAirWidget_186707_module_AQI_conversion_C0_average_10_layer_standard'>
+    <div id='PurpleAirWidget_18499_module_AQI_conversion_C0_average_10_layer_standard'>
       <div className="loading-container">
         Loading PurpleAir Widget...<space></space>
         <div className="spinner"></div>
