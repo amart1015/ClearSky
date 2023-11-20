@@ -21,8 +21,30 @@ const PurpleAirAPI = () => {
         fetchData();
     }, []);
 
+
+    // const data = {
+    //     aqi: 50, // Replace with a static AQI value
+    //     city: {
+    //         name: "City Name", // Replace with a static city name
+    //         location: "City Location", // Replace with a static location
+    //     },
+    //     sensor: {
+    //         temperature: 84,
+    //         humidity: 39,
+    //         pressure: 1014.43,
+    //         "pm2.5": 2.7,
+    //         last_seen: 1700427745,
+    //     }
+    // };
+
+
     if (!data) {
-        return <div>Loading...</div>;
+        return (
+        <div className="loading-container">
+            Loading PurpleAir Widget...<space></space>
+            <div className="spinner"></div>
+          </div>
+        );
     }
 
     const aqi = aqiFromPM(data.sensor["pm2.5"]);
