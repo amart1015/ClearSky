@@ -1,4 +1,5 @@
 .App {
+  background-color: #deb7f87a;
   text-align: center;
 }
 
@@ -24,13 +25,12 @@
 
 .loading-container {
   display: flex;
-  align-items: center;  /* This will vertically align the spinner and the text */
-  justify-content: center; /* Optional: This will horizontally center them */
+  align-items: center; 
+  justify-content: center;
 }
 
 
 .App-header {
-  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
