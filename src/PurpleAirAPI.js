@@ -8,7 +8,7 @@ const PurpleAirAPI = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://api.purpleair.com/v1/sensors/18499?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
+                const response = await axios.get('https://api.purpleair.com/v1/sensors/196941?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
                     headers: {
                         'X-API-Key': process.env.REACT_APP_PURPLEAIR_API_KEY
                     }
