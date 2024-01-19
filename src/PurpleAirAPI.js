@@ -140,7 +140,7 @@ const PurpleAirAPI = () => {
         <div className="data-container">
             <div className="data-field">
                 <p><strong>Temperature:</strong></p>
-                <p>{newApiData.temperature} °F</p>
+                <p>{getFfromC(data.sensor.temperature)} °F</p>
             </div>
             <div className="data-field">
                 <p><strong>Humidity:</strong></p>
