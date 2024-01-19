@@ -3,10 +3,29 @@ import './PurpleAirAPI.css';
 import axios from 'axios';
 
 const PurpleAirAPI = () => {
+    // const [data, setData] = useState(null);
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get('https://api.purpleair.com/v1/sensors/196941?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
+    //                 headers: {
+    //                     'X-API-Key': process.env.REACT_APP_PURPLEAIR_API_KEY
+    //                 }
+    //             });
+    //             setData(response.data);
+    //         } catch (error) {
+    //             console.error("Error fetching data:", error);
+    //         }
+    //     };
+    //     fetchData();
+    // }, []);
+
     const [data, setData] = useState(null);
+    const [newApiData, setNewApiData] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchPurpleAirData = async () => {
             try {
                 const response = await axios.get('https://api.purpleair.com/v1/sensors/196941?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
                     headers: {
@@ -15,11 +34,23 @@ const PurpleAirAPI = () => {
                 });
                 setData(response.data);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("Error fetching PurpleAir data:", error);
             }
         };
-        fetchData();
+
+        const fetchNewApiData = async () => {
+            try {
+                const response = await axios.get('http://73.85.109.47:80/data');
+                setNewApiData(response.data);
+            } catch (error) {
+                console.error("Error fetching new API data:", error);
+            }
+        };
+
+        fetchPurpleAirData();
+        fetchNewApiData();
     }, []);
+
 
 
     // const data = {
@@ -38,10 +69,10 @@ const PurpleAirAPI = () => {
     // };
 
 
-    if (!data) {
+    if (!data || !newApiData) {
         return (
         <div className="loading-container">
-            Loading PurpleAir Widget...<space></space>
+            Loading Air Quality Information...<space></space>
             <div className="spinner"></div>
           </div>
         );
@@ -97,8 +128,11 @@ const PurpleAirAPI = () => {
           return 'Invalid AQI'; // For AQI values below 0 or above 500
         }
       }
-    
 
+    function getFfromC(c){
+        return (c * 9/5) + 32
+    }
+    
     return (
     <div>
         <h2>Air Quality Information</h2>
@@ -106,11 +140,11 @@ const PurpleAirAPI = () => {
         <div className="data-container">
             <div className="data-field">
                 <p><strong>Temperature:</strong></p>
-                <p>{data.sensor.temperature-8} °F</p>
+                <p>{newApiData.temperature} °F</p>
             </div>
             <div className="data-field">
                 <p><strong>Humidity:</strong></p>
-                <p>{data.sensor.humidity-4} %</p>
+                <p>{newApiData.humidity} %</p>
             </div>
             <div className="data-field">
                 <p><strong>Pressure:</strong></p>
@@ -121,7 +155,10 @@ const PurpleAirAPI = () => {
                 <p>{data.sensor["pm2.5"]} ug/m3</p>
             </div>
         </div>
-        <p><strong>Last Updated:</strong> {new Date(data.sensor.last_seen * 1000).toLocaleString()}</p>
+        <p><strong>Last Updated from PurpleAir API:</strong></p>
+        <p>{new Date(data.sensor.last_seen * 1000).toLocaleString()}</p>
+        <p><strong>Last Updated from Temp/Humidity Sensor:</strong></p>
+        <p>{newApiData.last_seen}</p>
     </div>
 );
 }
