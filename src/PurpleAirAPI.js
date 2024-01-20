@@ -3,22 +3,22 @@ import './PurpleAirAPI.css';
 import axios from 'axios';
 
 const PurpleAirAPI = () => {
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
     const [mongoDbData, setMongoDbData] = useState(null);
 
     useEffect(() => {
-        const fetchPurpleAirData = async () => {
-            try {
-                const response = await axios.get('https://api.purpleair.com/v1/sensors/196941?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
-                    headers: {
-                        'X-API-Key': process.env.REACT_APP_PURPLEAIR_API_KEY
-                    }
-                });
-                setData(response.data);
-            } catch (error) {
-                console.error("Error fetching PurpleAir data:", error);
-            }
-        };
+        // const fetchPurpleAirData = async () => {
+        //     try {
+        //         const response = await axios.get('https://api.purpleair.com/v1/sensors/196941?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
+        //             headers: {
+        //                 'X-API-Key': process.env.REACT_APP_PURPLEAIR_API_KEY
+        //             }
+        //         });
+        //         setData(response.data);
+        //     } catch (error) {
+        //         console.error("Error fetching PurpleAir data:", error);
+        //     }
+        // };
 
         const fetchMongoDbData = async () => {
             try {
@@ -29,26 +29,26 @@ const PurpleAirAPI = () => {
             }
         };
 
-        fetchPurpleAirData();
+        // fetchPurpleAirData();
         fetchMongoDbData();
     }, []);
 
 
 
-    // const data = {
-    //     aqi: 50, // Replace with a static AQI value
-    //     city: {
-    //         name: "City Name", // Replace with a static city name
-    //         location: "City Location", // Replace with a static location
-    //     },
-    //     sensor: {
-    //         temperature: 84,
-    //         humidity: 39,
-    //         pressure: 1014.43,
-    //         "pm2.5": 2.7,
-    //         last_seen: 1700427745,
-    //     }
-    // };
+    const data = {
+        aqi: 50, // Replace with a static AQI value
+        city: {
+            name: "City Name", // Replace with a static city name
+            location: "City Location", // Replace with a static location
+        },
+        sensor: {
+            temperature: 84,
+            humidity: 39,
+            pressure: 1014.43,
+            "pm2.5": 2.7,
+            last_seen: 1700427745,
+        }
+    };
 
 
     if (!data || !mongoDbData) {
