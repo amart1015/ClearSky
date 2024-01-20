@@ -29,7 +29,7 @@ const PurpleAirAPI = () => {
             }
         };
 
-        // fetchPurpleAirData();
+        fetchPurpleAirData();
         fetchMongoDbData();
     }, []);
 
