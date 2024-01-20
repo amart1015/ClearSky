@@ -4,75 +4,61 @@ import axios from 'axios';
 
 const PurpleAirAPI = () => {
     // const [data, setData] = useState(null);
+    const [mongoDbData, setMongoDbData] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get('https://api.purpleair.com/v1/sensors/196941?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
-    //                 headers: {
-    //                     'X-API-Key': process.env.REACT_APP_PURPLEAIR_API_KEY
-    //                 }
-    //             });
-    //             setData(response.data);
-    //         } catch (error) {
-    //             console.error("Error fetching data:", error);
-    //         }
-    //     };
-    //     fetchData();
-    // }, []);
-
-    const [data, setData] = useState(null);
-    const [newApiData, setNewApiData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchPurpleAirData = async () => {
+        // const fetchPurpleAirData = async () => {
+        //     try {
+        //         const response = await axios.get('https://api.purpleair.com/v1/sensors/196941?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
+        //             headers: {
+        //                 'X-API-Key': process.env.REACT_APP_PURPLEAIR_API_KEY
+        //             }
+        //         });
+        //         setData(response.data);
+        //     } catch (error) {
+        //         console.error("Error fetching PurpleAir data:", error);
+        //     }
+        // };
+
+        const fetchMongoDbData = async () => {
             try {
-                const response = await axios.get('https://api.purpleair.com/v1/sensors/196941?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
-                    headers: {
-                        'X-API-Key': process.env.REACT_APP_PURPLEAIR_API_KEY
-                    }
-                });
-                setData(response.data);
+                const response = await axios.get('/api/data');
+                setMongoDbData(response.data[0]);
             } catch (error) {
-                console.error("Error fetching PurpleAir data:", error);
+                console.error('Error fetching MongoDB data:', error);
+                setError(error);
             }
         };
 
-        const fetchNewApiData = async () => {
-            try {
-                const response = await axios.get('http://73.85.109.47:80/data');
-                setNewApiData(response.data);
-            } catch (error) {
-                console.error("Error fetching new API data:", error);
-            }
-        };
-
-        fetchPurpleAirData();
-        fetchNewApiData();
+        // fetchPurpleAirData();
+        fetchMongoDbData();
     }, []);
 
 
 
-    // const data = {
-    //     aqi: 50, // Replace with a static AQI value
-    //     city: {
-    //         name: "City Name", // Replace with a static city name
-    //         location: "City Location", // Replace with a static location
-    //     },
-    //     sensor: {
-    //         temperature: 84,
-    //         humidity: 39,
-    //         pressure: 1014.43,
-    //         "pm2.5": 2.7,
-    //         last_seen: 1700427745,
-    //     }
-    // };
+    const data = {
+        aqi: 50, // Replace with a static AQI value
+        city: {
+            name: "City Name", // Replace with a static city name
+            location: "City Location", // Replace with a static location
+        },
+        sensor: {
+            temperature: 84,
+            humidity: 39,
+            pressure: 1014.43,
+            "pm2.5": 2.7,
+            last_seen: 1700427745,
+        }
+    };
 
 
-    if (!data || !newApiData) {
+    if (!data || !mongoDbData) {
         return (
         <div className="loading-container">
-            Loading Air Quality Information...<space></space>
+            Loading Air Quality Information...
             <div className="spinner"></div>
           </div>
         );
@@ -140,11 +126,11 @@ const PurpleAirAPI = () => {
         <div className="data-container">
             <div className="data-field">
                 <p><strong>Temperature:</strong></p>
-                <p>{getFfromC(newApiData.temperature)} °F</p>
+                <p>{getFfromC(mongoDbData.temperature)} °F</p>
             </div>
             <div className="data-field">
                 <p><strong>Humidity:</strong></p>
-                <p>{newApiData.humidity} %</p>
+                <p>{mongoDbData.humidity} %</p>
             </div>
             <div className="data-field">
                 <p><strong>Pressure:</strong></p>
@@ -158,7 +144,7 @@ const PurpleAirAPI = () => {
         <p><strong>Last Updated from PurpleAir API:</strong></p>
         <p>{new Date(data.sensor.last_seen * 1000).toLocaleString()}</p>
         <p><strong>Last Updated from Temp/Humidity Sensor:</strong></p>
-        <p>{newApiData.last_seen}</p>
+        <p>{mongoDbData.last_seen}</p>
     </div>
 );
 }
