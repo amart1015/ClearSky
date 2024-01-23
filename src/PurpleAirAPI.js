@@ -9,11 +9,7 @@ const PurpleAirAPI = () => {
     useEffect(() => {
         const fetchPurpleAirData = async () => {
             try {
-                const response = await axios.get('https://api.purpleair.com/v1/sensors/196941?fields=humidity%2Ctemperature%2Cpressure%2Cpm2.5%2Clast_seen', {
-                    headers: {
-                        'X-API-Key': process.env.REACT_APP_PURPLEAIR_API_KEY
-                    }
-                });
+                const response = await axios.get('/api/purpleairapi');
                 setData(response.data);
             } catch (error) {
                 console.error("Error fetching PurpleAir data:", error);
