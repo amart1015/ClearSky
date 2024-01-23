@@ -9,7 +9,7 @@ const PurpleAirAPI = () => {
     useEffect(() => {
         const fetchPurpleAirData = async () => {
             try {
-                const response = await axios.get('/api/purpleairapi');
+                const response = await axios.get('/api/purpleair');
                 setData(response.data);
             } catch (error) {
                 console.error("Error fetching PurpleAir data:", error);
