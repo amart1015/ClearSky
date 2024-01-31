@@ -6,6 +6,21 @@ const PurpleAirAPI = () => {
     // const [data, setData] = useState(null);
     const [mongoDbData, setMongoDbData] = useState(null);
 
+    const data = {
+        aqi: 50, // Replace with a static AQI value
+        city: {
+            name: "City Name", // Replace with a static city name
+            location: "City Location", // Replace with a static location
+        },
+        sensor: {
+            temperature: 84,
+            humidity: 39,
+            pressure: 1014.43,
+            "pm2.5": 9,
+            last_seen: 1700427745,
+        }
+    };
+
     useEffect(() => {
         // const fetchPurpleAirData = async () => {
         //     try {
@@ -15,6 +30,8 @@ const PurpleAirAPI = () => {
         //         console.error("Error fetching PurpleAir data:", error);
         //     }
         // };
+
+
 
         const fetchMongoDbData = async () => {
             try {
@@ -30,30 +47,16 @@ const PurpleAirAPI = () => {
     }, []);
 
 
-
-    const data = {
-        aqi: 50, // Replace with a static AQI value
-        city: {
-            name: "City Name", // Replace with a static city name
-            location: "City Location", // Replace with a static location
-        },
-        sensor: {
-            temperature: 84,
-            humidity: 39,
-            pressure: 1014.43,
-            "pm2.5": 2.7,
-            last_seen: 1700427745,
-        }
-    };
-
-
     if (!data || !mongoDbData) {
+        document.body.style.backgroundColor = null;
         return (
         <div className="loading-container">
             Loading Air Quality Information...
             <div className="spinner"></div>
           </div>
         );
+    }else{
+        document.body.style.backgroundColor = colorAQI(aqiFromPM(data.sensor["pm2.5"]));
     }
 
     const aqi = aqiFromPM(data.sensor["pm2.5"]);
@@ -81,6 +84,27 @@ const PurpleAirAPI = () => {
             return undefined;
         }
     }
+
+    function colorAQI(aqi) {
+        const transparency = 0.5; 
+    
+        if (aqi >= 0 && aqi <= 50) {
+            return `rgba(0, 128, 0, ${transparency})`; 
+        } else if (aqi >= 51 && aqi <= 100) {
+            return `rgba(255, 255, 0, ${transparency})`; 
+        } else if (aqi >= 101 && aqi <= 150) {
+            return `rgba(255, 165, 0, ${transparency})`;
+        } else if (aqi >= 151 && aqi <= 200) {
+            return `rgba(255, 0, 0, ${transparency})`;
+        } else if (aqi >= 201 && aqi <= 300) {
+            return `rgba(128, 0, 128, ${transparency})`; 
+        } else if (aqi >= 301 && aqi <= 500) {
+            return `rgba(128, 0, 0, ${transparency})`; 
+        } else {
+            return `rgba(0, 0, 0, ${transparency})`; 
+        }
+    }
+    
 
     function calcAQI(Cp, Ih, Il, BPh, BPl) {
         var a = (Ih - Il);
