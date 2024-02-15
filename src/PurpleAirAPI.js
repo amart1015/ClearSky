@@ -17,7 +17,7 @@ const PurpleAirAPI = () => {
             humidity: 39,
             pressure: 1014.43,
             "pm2.5": 9,
-            last_seen: 1707855004,
+            last_seen: 1707873004,
         }
     };
 
