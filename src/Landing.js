@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './Landing.css';
 import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
@@ -21,7 +20,7 @@ const Landing = () => {
     <div className="landing-container">
       <p>
         <b>
-          <i>Select which sensor you would like to view</i>
+          <i>Select which sensor you would like to view:</i>
         </b>
       </p>
       <button className="button-1" onClick={() => handleSensorClick(196941)}>
