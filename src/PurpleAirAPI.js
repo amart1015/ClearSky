@@ -1,37 +1,42 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import "./PurpleAirAPI.css";
 import axios from "axios";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 const PurpleAirAPI = () => {
-  const [data, setData] = useState(null);
+//   const [data, setData] = useState(null);
   const [mongoDbData, setMongoDbData] = useState(null);
+  const location = useLocation(); 
+  const searchParams = new URLSearchParams(location.search);
+  const sensorId = searchParams.get("sensorId");
 
-//   const data = {
-//     aqi: 50, // Replace with a static AQI value
-//     city: {
-//       name: "City Name", // Replace with a static city name
-//       location: "City Location", // Replace with a static location
-//     },
-//     sensor: {
-//       temperature: 84,
-//       humidity: 39,
-//       pressure: 1014.43,
-//       "pm2.5": 9,
-//       last_seen: 1707873004,
-//     },
-//   };
+  const data = {
+    aqi: 50, // Replace with a static AQI value
+    city: {
+      name: "City Name", // Replace with a static city name
+      location: "City Location", // Replace with a static location
+    },
+    sensor: {
+      temperature: 84,
+      humidity: 39,
+      pressure: 1014.43,
+      "pm2.5": 9,
+      last_seen: 1707873004,
+    },
+  };
 
   useEffect(() => {
-    const fetchPurpleAirData = async () => {
-        try {
-            const response = await axios.get('/api/purpleair');
-            setData(response.data);
-        } catch (error) {
-            console.error("Error fetching PurpleAir data:", error);
-        }
-    };
+    // const fetchPurpleAirData = async () => {
+    //     try {
+    //         const response = await axios.get('/api/purpleair');
+    //         setData(response.data);
+    //     } catch (error) {
+    //         console.error("Error fetching PurpleAir data:", error);
+    //     }
+    // };
 
     const fetchMongoDbData = async () => {
       try {
@@ -42,9 +47,11 @@ const PurpleAirAPI = () => {
       }
     };
 
-    fetchPurpleAirData();
+    console.log('Sensor ID:', sensorId);
+
+    // fetchPurpleAirData();
     fetchMongoDbData();
-  }, []);
+  }, [sensorId]);
 
   if (!data || !mongoDbData) {
     document.body.style.backgroundColor = null;
@@ -137,6 +144,7 @@ const PurpleAirAPI = () => {
   return (
     <div>
       <h2>Air Quality Information</h2>
+      <p>For Sensor: {sensorId}</p>
       <p>
         <strong>
           <Popup
