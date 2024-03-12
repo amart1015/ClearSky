@@ -1,0 +1,31 @@
+.interactive-map-container img {
+    max-width: 100%;
+    height: auto;
+  }
+
+.landing-container {
+    position: relative;
+    text-align: center;
+    color: white;
+    max-width: 100%;
+    height: auto;
+}
+
+  
+  @media (min-width: 769px) {
+    .interactive-map-container img {
+      max-width: 80%;
+    }
+    .button-1 {
+        position: absolute;
+        top: 50%;
+        left: 54%;
+      }
+    
+    .button-2 {
+        position: absolute;
+        top: 50%;
+        left: 24%;
+    }
+  }
+  

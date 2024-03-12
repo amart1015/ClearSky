@@ -1,10 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import BrowserRouter, Routes, and Route
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import logo from './purpleair.png';
 import './App.css'; 
 import PurpleAirAPI from './PurpleAirAPI';
-import PurpleAirWidget from './PurpleAirWidget'; 
-import InteractiveMap from './InteractiveMap'; 
+import Landing from './Landing'; 
 
 function App() {
   return (
@@ -17,8 +16,7 @@ function App() {
           <p><b>ClearSky</b></p>
           <Routes>
             <Route path="/sensor-information" element={<PurpleAirAPI />} />
-            {/* <Route path="/purple-air-widget" element={<PurpleAirWidget />} /> */}
-            <Route path="/" element={<InteractiveMap />} />
+            <Route path="/" element={<Landing />} />
           </Routes>
         </header>
       </div>
