@@ -5,34 +5,33 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 const PurpleAirAPI = () => {
-  // const [data, setData] = useState(null);
+  const [data, setData] = useState(null);
   const [mongoDbData, setMongoDbData] = useState(null);
-  const [showPopup, setShowPopup] = useState(false);
 
-  const data = {
-    aqi: 50, // Replace with a static AQI value
-    city: {
-      name: "City Name", // Replace with a static city name
-      location: "City Location", // Replace with a static location
-    },
-    sensor: {
-      temperature: 84,
-      humidity: 39,
-      pressure: 1014.43,
-      "pm2.5": 9,
-      last_seen: 1707873004,
-    },
-  };
+//   const data = {
+//     aqi: 50, // Replace with a static AQI value
+//     city: {
+//       name: "City Name", // Replace with a static city name
+//       location: "City Location", // Replace with a static location
+//     },
+//     sensor: {
+//       temperature: 84,
+//       humidity: 39,
+//       pressure: 1014.43,
+//       "pm2.5": 9,
+//       last_seen: 1707873004,
+//     },
+//   };
 
   useEffect(() => {
-    // const fetchPurpleAirData = async () => {
-    //     try {
-    //         const response = await axios.get('/api/purpleair');
-    //         setData(response.data);
-    //     } catch (error) {
-    //         console.error("Error fetching PurpleAir data:", error);
-    //     }
-    // };
+    const fetchPurpleAirData = async () => {
+        try {
+            const response = await axios.get('/api/purpleair');
+            setData(response.data);
+        } catch (error) {
+            console.error("Error fetching PurpleAir data:", error);
+        }
+    };
 
     const fetchMongoDbData = async () => {
       try {
@@ -43,7 +42,7 @@ const PurpleAirAPI = () => {
       }
     };
 
-    // fetchPurpleAirData();
+    fetchPurpleAirData();
     fetchMongoDbData();
   }, []);
 
@@ -62,11 +61,6 @@ const PurpleAirAPI = () => {
   }
 
   const aqi = aqiFromPM(data.sensor["pm2.5"]);
-
-  const togglePopup = () => {
-    console.log("clicked");
-    setShowPopup(!showPopup);
-  };
   function aqiFromPM(pm) {
     if (isNaN(pm)) return "-";
     if (pm === undefined) return "-";
@@ -132,7 +126,7 @@ const PurpleAirAPI = () => {
     } else if (aqi >= 301 && aqi <= 500) {
       return "Hazardous";
     } else {
-      return "Invalid AQI"; // For AQI values below 0 or above 500
+      return "Invalid AQI"; 
     }
   }
 
@@ -151,13 +145,12 @@ const PurpleAirAPI = () => {
                 type="button"
                 className="btTxt submit transparent-button"
                 id="saveForm"
-                onClick={togglePopup}
               >
                 <div className="button-content">
                   <img
                     src="/information-button.png"
                     alt="Save Form"
-                    style={{ width: "13px", height: "13px" }} // Adjust the width and height as needed
+                    style={{ width: "13px", height: "13px" }} 
                   />
                 </div>
               </button>
@@ -189,7 +182,7 @@ const PurpleAirAPI = () => {
                   <img
                     src="/information-button.png"
                     alt="Save Form"
-                    style={{ width: "15px", height: "15px" }} // Adjust the width and height as needed
+                    style={{ width: "15px", height: "15px" }} 
                   />
                 </div>
               </button>
