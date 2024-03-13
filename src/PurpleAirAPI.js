@@ -165,6 +165,7 @@ const PurpleAirAPI = () => {
               </button>
             }
             position="right center"
+            on="hover"
           >
             <div>
               <p>
@@ -197,6 +198,7 @@ const PurpleAirAPI = () => {
               </button>
             }
             position="left center"
+            on="hover"
           >
             <div style={{ maxWidth: "100%", height: "auto" }}>
               <img
