@@ -3,29 +3,31 @@ import { useLocation } from "react-router-dom";
 import "./PurpleAirAPI.css";
 import axios from "axios";
 import Popup from "reactjs-popup";
+import LineChart from './LineChart'; 
 import "reactjs-popup/dist/index.css";
 
 const PurpleAirAPI = () => {
   const [data, setData] = useState(null);
   const [mongoDbData, setMongoDbData] = useState(null);
+  const [showChart, setShowChart] = useState(false);
   const location = useLocation(); 
   const searchParams = new URLSearchParams(location.search);
   const sensorId = searchParams.get("sensorId");
 
-//   const data = {
-//     aqi: 50, // Replace with a static AQI value
-//     city: {
-//       name: "City Name", // Replace with a static city name
-//       location: "City Location", // Replace with a static location
-//     },
-//     sensor: {
-//       temperature: 84,
-//       humidity: 39,
-//       pressure: 1014.43,
-//       "pm2.5": 9,
-//       last_seen: 1707873004,
-//     },
-//   };
+  // const data = {
+  //   aqi: 50, // Replace with a static AQI value
+  //   city: {
+  //     name: "City Name", // Replace with a static city name
+  //     location: "City Location", // Replace with a static location
+  //   },
+  //   sensor: {
+  //     temperature: 84,
+  //     humidity: 39,
+  //     pressure: 1014.43,
+  //     "pm2.5": 10,
+  //     last_seen: 1707873004,
+  //   },
+  // };
 
   useEffect(() => {
     const fetchPurpleAirData = async (sensorId) => {
@@ -253,6 +255,10 @@ const PurpleAirAPI = () => {
           </div>
         </div>
       </div>
+      {showChart && <LineChart />}
+      <button className="button-17" style={{ backgroundColor: aqi !== undefined ? colorAQI(aqi) : "white" }}onClick={() => setShowChart(!showChart)}>
+        {showChart ? "Hide Chart" : "Show More"}
+      </button>
     </div>
   );
 };

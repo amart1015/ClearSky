@@ -4,6 +4,7 @@ import logo from './purpleair.png';
 import './App.css'; 
 import PurpleAirAPI from './PurpleAirAPI';
 import Landing from './Landing'; 
+import NotFound from './NotFound';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/sensor-information" element={<PurpleAirAPI />} />
             <Route path="/" element={<Landing />} />
+            <Route path='*' element={<NotFound />}/>
           </Routes>
         </header>
       </div>

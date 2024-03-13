@@ -25,12 +25,9 @@ const Landing = () => {
         </b>
       </p>
       <button class="button-17" onClick={() => handleSensorClick(196941)}>
-        PCA - Paul Cejas Architecture Building
-      </button>
-      <button class="button-17" onClick={() => handleSensorClick(196941)}>
         Karen's House
       </button>
-      <button class="button-17" onClick={() => handleSensorClick(196941)}>
+      <button class="button-17" onClick={() => handleSensorClick(18499)}>
         Gabby's House
       </button>
     </div>
