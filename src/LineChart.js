@@ -7,11 +7,11 @@ import "./LineChart.css";
 const LineChartComponent = () => {
   // Set initial fake data for the line chart
   const [chartData, setChartData] = useState({
-    labels: ["Mar 13th", "Mar 14th", "Mar 15th", "Mar 16th", "Mar 17th", "Mar 18th"],
+    labels: ["Mar 11th", "Mar 12th", "Mar 13th", "Mar 14th", "Mar 15th", "Mar 16th", "Mar 17th", "Mar 18th"],
     datasets: [
       {
         label: "AQI",
-        data: [41, 39, 34, 48, 43, 67], // Fake AQI values
+        data: [37, 35, 42, 40, 37, 45, 41, 67], // Fake AQI values
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
         backgroundColor: 'rgba(255, 255, 255, 0.5)', 
