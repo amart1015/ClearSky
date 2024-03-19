@@ -257,7 +257,7 @@ const PurpleAirAPI = () => {
           </div>
         </div>
       </div>
-      {showChart && <LineChart />}
+      {showChart && <LineChart sensorId={sensorId} />}
       <button className="button-17" style={{ backgroundColor: aqi !== undefined ? colorAQI(aqi) : "white" }}onClick={() => setShowChart(!showChart)}>
         {showChart ? "Hide Chart" : "Show More"}
       </button>
