@@ -4,7 +4,9 @@ module.exports = async (req, res) => {
     try {
         const { sensorId } = req.query; 
 
-        const currentTimeStamp = Math.floor(Date.now() / 1000);
+        const currentDate = new Date();
+        currentDate.setUTCHours(0, 0, 0, 0);
+        const currentTimeStamp = Math.floor(currentDate.getTime() / 1000);
         const sevenDaysAgoTimeStamp = currentTimeStamp - (7 * 24 * 60 * 60);
 
         
