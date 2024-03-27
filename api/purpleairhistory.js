@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
             },
             params: {
                 start_timestamp: sevenDaysAgoTimeStamp,
-                end_timestamp: currentTimeStamp,
                 average: 1440,
                 fields: 'pm2.5_atm'
             }

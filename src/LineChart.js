@@ -28,8 +28,6 @@ const LineChartComponent = ({ sensorId }) => {
     try {
       const response = await axios.get(`/api/purpleairhistory?sensorId=${sensorId}`);
       const { data } = response;
-
-      console.log(data);
     
       if (data && Array.isArray(data.data)) {
         const dataArray = data.data;
@@ -45,10 +43,6 @@ const LineChartComponent = ({ sensorId }) => {
           return `${month} ${day}${suffix}`;
         });
         const aqiValues = dataArray.map(entry => aqiFromPM(entry[1]));
-  
-        console.log(dataArray);
-
-        console.log(aqiValues);
 
         setChartData({
           labels: labels,

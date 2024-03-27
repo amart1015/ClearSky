@@ -48,7 +48,6 @@ const PurpleAirAPI = () => {
       }
     };
 
-    console.log('Sensor ID:', sensorId);
 
     fetchPurpleAirData(sensorId);
     fetchMongoDbData();
