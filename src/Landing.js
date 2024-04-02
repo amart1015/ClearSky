@@ -25,10 +25,10 @@ const Landing = () => {
         </b>
       </p>
       <button class="button-17" onClick={() => handleSensorClick(196941)}>
-        Karen's House
+        Westchester
       </button>
       <button class="button-17" onClick={() => handleSensorClick(18499)}>
-        Gabby's House
+        Pembroke Pines
       </button>
     </div>
   );
