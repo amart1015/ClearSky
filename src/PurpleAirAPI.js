@@ -257,10 +257,26 @@ const PurpleAirAPI = () => {
         </div>
       </div>
       {showChart && <LineChart sensorId={sensorId} />}
-      <button className="button-17" style={{ backgroundColor: aqi !== undefined ? colorAQI(aqi) : "white" }}onClick={() => setShowChart(!showChart)}>
+      <button
+        className="button-17"
+        style={{ backgroundColor: aqi !== undefined ? colorAQI(aqi) : "white" }}
+        onClick={() => {
+          setShowChart(!showChart);
+          if (!showChart) {
+            setTimeout(() => {
+              window.scrollTo({
+                left: 0,
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+              });
+            }, 0); 
+          }
+        }}
+      >
         {showChart ? "Hide Chart" : "Show More"}
       </button>
     </div>
+    
   );
 };
 

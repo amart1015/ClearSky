@@ -20,11 +20,24 @@ const LineChartComponent = ({ sensorId }) => {
     ],
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     fetchPurpleAirHistoryData(sensorId); 
   }, [sensorId]); 
 
+  useEffect(() => {
+    if (!isLoading) {
+      window.scrollTo({
+        left: 0,
+        top: document.body.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, [isLoading]); 
+
   const fetchPurpleAirHistoryData = async (sensorId) => {
+    setIsLoading(true);
     try {
       const response = await axios.get(`/api/purpleairhistory?sensorId=${sensorId}`);
       const { data } = response;
@@ -60,6 +73,7 @@ const LineChartComponent = ({ sensorId }) => {
     } catch (error) {
       console.error("Error fetching PurpleAir data:", error);
     }
+    setIsLoading(false);
   };
   
   
@@ -110,11 +124,19 @@ const LineChartComponent = ({ sensorId }) => {
   return (
     <div>
       <h3>Historical AQI Data</h3>
-      <div className="chart-container">
-        <Line data={chartData} />
-      </div>
+      {isLoading ? (
+          <div className="loading-container">
+            Loading Air Quality Information...
+            <div className="spinner"></div>
+          </div>
+        ) : (
+          <div className="chart-container">
+          <Line data={chartData} />
+          </div>
+        )}
     </div>
   );
+  
 };
 
 export default LineChartComponent;
