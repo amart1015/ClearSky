@@ -13,7 +13,6 @@ const PurpleAirAPI = () => {
   const location = useLocation(); 
   const searchParams = new URLSearchParams(location.search);
   const sensorId = searchParams.get("sensorId");
-  const currentTime = new Date();
 
   // const data = {
   //   aqi: 50, // Replace with a static AQI value
@@ -219,8 +218,7 @@ const PurpleAirAPI = () => {
           <p>{getFfromC(mongoDbData.temperature)} °F</p>
           <div className="last-updated-container">
             <p style={{ fontSize: "14px" }}>Last Updated:</p>
-            {/* <p style={{ fontSize: "14px" }}>{mongoDbData.last_seen}</p> */}
-            <p style={{ fontSize: "14px" }}>{currentTime.toLocaleTimeString()}</p>
+            <p style={{ fontSize: "14px" }}>{mongoDbData.last_seen}</p>
           </div>
         </div>
         <div className="data-field">
@@ -230,8 +228,7 @@ const PurpleAirAPI = () => {
           <p>{mongoDbData.humidity} %</p>
           <div className="last-updated-container">
             <p style={{ fontSize: "14px" }}>Last Updated:</p>
-            {/* <p style={{ fontSize: "14px" }}>{mongoDbData.last_seen}</p> */}
-            <p style={{ fontSize: "14px" }}>{currentTime.toLocaleTimeString()}</p>
+            <p style={{ fontSize: "14px" }}>{mongoDbData.last_seen}</p>
           </div>
         </div>
         <div className="data-field">
