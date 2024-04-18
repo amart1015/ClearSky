@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
         const currentDate = new Date();
         currentDate.setUTCHours(0, 0, 0, 0);
         const currentTimeStamp = Math.floor(currentDate.getTime() / 1000);
-        const sevenDaysAgoTimeStamp = currentTimeStamp - (7 * 24 * 60 * 60);
+        const sevenDaysAgoTimeStamp = currentTimeStamp - (.5 * 24 * 60 * 60);
 
         
         const response = await axios.get(`https://api.purpleair.com/v1/sensors/${sensorId}/history`, {
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
             },
             params: {
                 start_timestamp: sevenDaysAgoTimeStamp,
-                average: 1440,
+                average: 60,
                 fields: 'pm2.5_atm'
             }
         });

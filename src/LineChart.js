@@ -49,12 +49,15 @@ const LineChartComponent = ({ sensorId }) => {
         dataArray.sort((a, b) => a[0] - b[0]);
   
         const labels = dataArray.map(entry => {
-          const date = new Date(entry[0] * 1000);
-          const day = date.getDate();
-          const suffix = getSuffix(day);
-          const month = date.toLocaleString('default', { month: 'long' });
-          return `${month} ${day}${suffix}`;
-        });
+          const date = new Date(entry[0] * 1000); // Convert Unix timestamp to JavaScript Date object
+          const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month and format it as two digits
+          const day = date.getDate().toString().padStart(2, '0'); // Get day and format it as two digits
+          const hours = date.getHours();
+          const minutes = date.getMinutes().toString().padStart(2, '0'); // Get minutes and format it as two digits
+          const ampm = hours >= 12 ? 'PM' : 'AM'; // Determine AM/PM
+          const formattedHour = hours % 12 || 12; // Convert hour to 12-hour format
+          return `${month}/${day} ${formattedHour}:${minutes} ${ampm}`;
+      });      
         const aqiValues = dataArray.map(entry => aqiFromPM(entry[1]));
 
         setChartData({
