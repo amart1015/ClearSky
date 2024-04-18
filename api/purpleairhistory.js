@@ -5,9 +5,8 @@ module.exports = async (req, res) => {
         const { sensorId } = req.query; 
 
         const currentDate = new Date();
-        currentDate.setUTCHours(0, 0, 0, 0);
         const currentTimeStamp = Math.floor(currentDate.getTime() / 1000);
-        const sevenDaysAgoTimeStamp = currentTimeStamp - (.5 * 24 * 60 * 60);
+        const TimeAgoTimeStamp = currentTimeStamp - 43200;
 
         
         const response = await axios.get(`https://api.purpleair.com/v1/sensors/${sensorId}/history`, {
@@ -15,7 +14,7 @@ module.exports = async (req, res) => {
                 'X-API-Key': process.env.PURPLEAIR_API_KEY
             },
             params: {
-                start_timestamp: sevenDaysAgoTimeStamp,
+                start_timestamp: TimeAgoTimeStamp,
                 average: 60,
                 fields: 'pm2.5_atm'
             }

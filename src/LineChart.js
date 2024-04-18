@@ -47,7 +47,7 @@ const LineChartComponent = ({ sensorId }) => {
   
         
         dataArray.sort((a, b) => a[0] - b[0]);
-  
+
         const labels = dataArray.map(entry => {
           const date = new Date(entry[0] * 1000); 
           const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
