@@ -28,7 +28,7 @@ const Landing = () => {
         Westchester
       </button>
       <button class="button-17" onClick={() => handleSensorClick(18499)}>
-        Pembroke Pines
+        Ocean Bank Convocation Center
       </button>
     </div>
   );
