@@ -124,6 +124,19 @@ const LineChartComponent = ({ sensorId }) => {
     return Math.round((a / b) * c + Il);
   }
 
+  const options = {
+    scales: {
+      x: { 
+        ticks: {
+          callback: function(val, index) {
+            return index % 2 === 0 ? this.getLabelForValue(val) : '';
+          },
+          autoSkip: false, 
+        }
+      }
+    }
+  };
+
   return (
     <div>
       <h3>Historical AQI Data</h3>
@@ -134,7 +147,7 @@ const LineChartComponent = ({ sensorId }) => {
           </div>
         ) : (
           <div className="chart-container">
-          <Line data={chartData} />
+          <Line data={chartData} options={options}/>
           </div>
         )}
     </div>
