@@ -41,6 +41,25 @@ const LineChartComponent = ({ sensorId }) => {
     try {
       const response = await axios.get(`/api/purpleairhistory?sensorId=${sensorId}`);
       const { data } = response;
+
+      if (sensorId === '18499') {
+        const fakeData = [
+          [1713536787, 2.4],
+          [1713533187, 3.1], 
+          [1713529587, 2.8],
+          [1713525987, 3.6],
+          [1713522387, 3.9],
+          [1713518787, 3.2],
+        ];
+
+        console.log(fakeData);
+  
+        if (data && Array.isArray(data.data)) {
+          data.data = fakeData.concat(data.data);
+        } else {
+          data = { data: fakeData };
+        }
+      }
     
       if (data && Array.isArray(data.data)) {
         const dataArray = data.data;
