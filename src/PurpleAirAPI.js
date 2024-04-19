@@ -215,16 +215,18 @@ const PurpleAirAPI = () => {
         <p>
           <strong>Temperature:</strong>
         </p>
-        {
+        {/* {
           sensorId === '196941' ? (
             <p>{data.sensor.temperature-8} °F</p> 
           ) : (
             <p>{Math.round(getFfromC(mongoDbData.temperature))} °F</p> 
           )
-        }
+        } */}
+          <p>{Math.round(getFfromC(mongoDbData.temperature))} °F</p> 
+
           <div className="last-updated-container">
             <p style={{ fontSize: "14px" }}>Last Updated:</p>
-            {
+            {/* {
                 sensorId === '196941' ? (
                   <p style={{ fontSize: "14px" }}>
                     {new Date(data.sensor.last_seen * 1000).toLocaleString()}
@@ -232,23 +234,27 @@ const PurpleAirAPI = () => {
                 ) : (
                   <p style={{ fontSize: "14px" }}>{mongoDbData.last_seen}</p>
                 )
-              }
+              } */}
+              <p style={{ fontSize: "14px" }}>{mongoDbData.last_seen}</p>
+
           </div>
         </div>
         <div className="data-field">
           <p>
             <strong>Humidity:</strong>
           </p>
-          {
+          {/* {
           sensorId === '196941' ? (
             <p>{Math.round(data.sensor.humidity * 1.55)} %</p> 
           ) : (
             <p>{mongoDbData.humidity} %</p> 
           )
-        }
+        } */}
+            <p>{mongoDbData.humidity} %</p> 
+
           <div className="last-updated-container">
             <p style={{ fontSize: "14px" }}>Last Updated:</p>
-            {
+            {/* {
                 sensorId === '196941' ? (
                   <p style={{ fontSize: "14px" }}>
                     {new Date(data.sensor.last_seen * 1000).toLocaleString()}
@@ -256,7 +262,9 @@ const PurpleAirAPI = () => {
                 ) : (
                   <p style={{ fontSize: "14px" }}>{mongoDbData.last_seen}</p>
                 )
-              }
+              } */}
+              <p style={{ fontSize: "14px" }}>{mongoDbData.last_seen}</p>
+
           </div>
         </div>
         <div className="data-field">

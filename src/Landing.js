@@ -24,10 +24,10 @@ const Landing = () => {
           <i>Select which sensor you would like to view:</i>
         </b>
       </p>
-      <button class="button-17" onClick={() => handleSensorClick(196941)}>
+      {/* <button class="button-17" onClick={() => handleSensorClick(18499)}>
         Westchester
-      </button>
-      <button class="button-17" onClick={() => handleSensorClick(18499)}>
+      </button> */}
+      <button class="button-17" onClick={() => handleSensorClick(196941)}>
         Ocean Bank Convocation Center
       </button>
     </div>
